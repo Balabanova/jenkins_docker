@@ -8,7 +8,7 @@ pipeline {
                 script {cleanWs()}
                 
                 script {
-                    echo 'Start download project'
+                    echo 'Start boot process...'
                     checkout([$class                           : 'GitSCM',
                               branches                         : [[name: '*/master']],
                               doGenerateSubmoduleConfigurations: false,
@@ -26,6 +26,7 @@ pipeline {
                     sh "docker build ${WORKSPACE}/auto -t webapp"
                     sh "docker run -d webapp"
                     sh "docker exec -it webapp "df -h > ~/proc""
+                   
                 }
             }
         }    
