@@ -1,12 +1,9 @@
 pipeline {
     agent{node('master')}
-    stages {
-        
+    stages { 
         stage('Dowload project') {
-            steps {
-                
+            steps { 
                 script {cleanWs()}
-                
                 script {
                     echo 'Start boot process...'
                     checkout([$class                           : 'GitSCM',
@@ -18,15 +15,13 @@ pipeline {
                               userRemoteConfigs                : [[credentialsId: 'LizaBalabanovaGit', url: 'https://github.com/Balabanova/jenkins_docker.git']]])
                 }
             }
-        }
-        
+        }     
         stage ('Create docker image'){
             steps{
                 script{
                     sh "docker build ${WORKSPACE}/auto -t webapp"
                     sh "docker run -d webapp"
-                    sh "docker exec -it webapp "df -h > ~/proc""
-                   
+                    sh "docker exec -it webapp "df -h > ~/proc""            
                 }
             }
         }    
