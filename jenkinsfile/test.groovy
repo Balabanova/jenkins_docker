@@ -49,7 +49,6 @@ pipeline {
                 }
             }
         }      
-    } 
     
     stage ('Write to file'){
             steps{
