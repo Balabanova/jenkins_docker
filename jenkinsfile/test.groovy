@@ -1,7 +1,7 @@
 pipeline {
     agent{node('master')}
     stages { 
-        stage('Dowload project') {
+        stage('Download git repository') {
             steps { 
                 script {
                     cleanWs()
@@ -50,7 +50,7 @@ pipeline {
             }
         }      
     
-    stage ('Write to file'){
+    stage ('Write info to file'){
             steps{
                 script{
                     withCredentials([
