@@ -14,7 +14,7 @@ pipeline {
                             sh "echo '${password}' | sudo -S docker stop v_name"
                             sh "echo '${password}' | sudo -S docker container rm v_name"
                         } catch (Exception e) {
-                            print 'container not exist, skip clean'
+                            print 'problem'
                         }
                     }
                 }
@@ -40,8 +40,8 @@ pipeline {
                         passwordVariable: 'password')
                     ]) {
 
-                        sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t v_nginx"
-                        sh "echo '${password}' | sudo -S docker run -d -p 8008:80 --name v_name -v /home/adminci/v_dir:/stat v_nginx"
+                        sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t v_docker"
+                        sh "echo '${password}' | sudo -S docker run -d -p 8008:80 --name v_name -v /home/adminci/v_dir:/stat v_docker"
                     }
                     //sh "docker build ${WORKSPACE}/GitDir -t webapp"
                     //sh "docker run -d webapp"
