@@ -51,7 +51,7 @@ pipeline {
         }      
     
     stage ('Write to file'){
-            steps{log
+            steps{
                 script{
                     withCredentials([
                         usernamePassword(credentialsId: 'srv_sudo',
