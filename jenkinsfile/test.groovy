@@ -58,9 +58,8 @@ pipeline {
                         usernameVariable: 'username',
                         passwordVariable: 'password')
                     ]) {
-                        sh "echo '${password}' | sudo -S docker exec -t v_name bash -c 'stat text_file.txt >> /stat/v_file.txt'"
                         sh "echo '${password}' | sudo -S docker exec -t v_name bash -c 'df -h > /stat/v_file.txt'"
-                        sh "echo '${password}' | sudo -S docker exec -t v_name bash -c 'top -n 1 -b >> /stat/v_file.txt'"                       
+                        sh "echo '${password}' | sudo -S docker exec -t v_name bash -c '\n top -n 1 -b >> /stat/v_file.txt'"                       
                     }
                 }
             }
