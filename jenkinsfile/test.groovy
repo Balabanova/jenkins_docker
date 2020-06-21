@@ -59,8 +59,8 @@ pipeline {
                         passwordVariable: 'password')
                     ]) {
                         
-                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'df -h > /file/text_file.txt'"
-                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'top -n 1 -b >> /file/text_file.txt'"
+                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'df -h > /file/file.txt'"
+                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'top -n 1 -b >> /file/file.txt'"
                     }
                 }
             }
