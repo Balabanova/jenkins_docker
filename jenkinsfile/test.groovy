@@ -41,7 +41,7 @@ pipeline {
                     ]) {
 
                         sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t v_nginx"
-                        sh "echo '${password}' | sudo -S docker run -d -p 8008:80 --name v_name -v /home/adminci/v_dir:/log v_nginx"
+                        sh "echo '${password}' | sudo -S docker run -d -p 8008:80 --name v_name -v /home/adminci/v_dir:/stat v_nginx"
                     }
                     //sh "docker build ${WORKSPACE}/GitDir -t webapp"
                     //sh "docker run -d webapp"
@@ -51,7 +51,7 @@ pipeline {
         }      
     
     stage ('Write to file'){
-            steps{
+            steps{log
                 script{
                     withCredentials([
                         usernamePassword(credentialsId: 'srv_sudo',
@@ -59,8 +59,8 @@ pipeline {
                         passwordVariable: 'password')
                     ]) {
                         
-                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'df -h > /log/log.txt'"
-                        sh "echo '${password}' | sudo -S docker exec -t isng bash -c 'top -n 1 -b >> /log/log.txt'"
+                        sh "echo '${password}' | sudo -S docker exec -t v_name bash -c 'df -h > /stat/text_file.txt'"
+                        sh "echo '${password}' | sudo -S docker exec -t v_name bash -c 'top -n 1 -b >> /stat/text_file.txt'"
                     }
                 }
             }
