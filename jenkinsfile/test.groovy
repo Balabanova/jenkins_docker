@@ -15,7 +15,9 @@ pipeline {
                             sh "echo '${password}' | sudo -S docker container rm v_name"
                         } catch (Exception e) {
                             print 'problem'
+                            currentBuild.result = 'FAILURE'
                         }
+
                     }
                 }
                 script {
@@ -65,5 +67,20 @@ pipeline {
                 }
             }
         }
+        
+        stage ('Stop'){
+            steps{
+                script{
+                    withCredentials([
+                        usernamePassword(credentialsId: 'srv_sudo',
+                        usernameVariable: 'username',
+                        passwordVariable: 'password')
+                    ]) {
+                        sh "echo '${password}' | sudo -S docker stop v_name"                 
+                    }
+                }
+            }
+        }
+        
     }
 }
